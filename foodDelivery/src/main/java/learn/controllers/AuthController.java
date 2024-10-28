@@ -1,6 +1,7 @@
 package learn.controllers;
 
 import learn.models.AppUser;
+import learn.security.JwtConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,17 +12,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 public class AuthController {
 
     public final AuthenticationManager authenticationManager;
+    private final JwtConverter jwtConverter;
 
-    public AuthController(AuthenticationManager authenticationManager) {
+    public AuthController(AuthenticationManager authenticationManager, JwtConverter jwtConverter) {
         this.authenticationManager = authenticationManager;
+        this.jwtConverter = jwtConverter;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loging(@RequestBody AppUser user){
+    public ResponseEntity<Map<String, String>> login(@RequestBody AppUser user){
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 user.getUsername(),
                 user.getPassword());
@@ -33,8 +38,10 @@ public class AuthController {
                 String role = appUser.getAuthorities().stream()
                         .map(authority -> authority.getAuthority())
                         .findFirst()
-                        .orElse("ROLE_USER");
+                        .orElse("none");
                 return new ResponseEntity<>(
+                        Map.of("jwt", jwtConverter.getTokenFromUser(appUser), "userId", String.valueOf(appUser.getAppUserId()),
+                                "role", role),
                         HttpStatus.OK);
             }
         } catch (AuthenticationException ex){

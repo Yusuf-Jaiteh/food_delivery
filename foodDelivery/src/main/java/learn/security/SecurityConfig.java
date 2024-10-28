@@ -21,10 +21,13 @@ public class SecurityConfig {
     // To Be Completed
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST,"/login", "/api/users").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/users/**").permitAll()
+
                 )
                 .sessionManagement(configurer -> configurer
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
