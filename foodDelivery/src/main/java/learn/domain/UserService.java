@@ -3,6 +3,7 @@ package learn.domain;
 import learn.data.UserRepository;
 import learn.models.Role;
 import learn.models.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder encoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;
+        this.encoder = encoder;
     }
 
     public Optional<User> findById(Long id){
@@ -35,6 +38,7 @@ public class UserService {
         if(!result.isSuccess()){
             return result;
         }
+        user.setPassword(encoder.encode(user.getPassword()));
         result.setPayload(userRepository.save(user));
         return result;
     }
@@ -107,7 +111,7 @@ public class UserService {
             result.addMessage("Role must be either 'customer' or 'staff' or 'deliverer'", ResultType.INVALID);
         }
 
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent() && !userRepository.findByEmail(user.getEmail()).get().getId().equals(user.getId())) {
             result.addMessage("Email already exists", ResultType.INVALID);
         }
 

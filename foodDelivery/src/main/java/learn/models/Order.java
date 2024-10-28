@@ -16,7 +16,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "menu_id")
-    private User menu;
+    private Menu menu;
 
     @ManyToOne
     @JoinColumn(name = "deliverer_id")
@@ -41,11 +41,11 @@ public class Order {
         this.customer = customer;
     }
 
-    public User getMenu() {
+    public Menu getMenu() {
         return menu;
     }
 
-    public void setMenu(User menu) {
+    public void setMenu(Menu menu) {
         this.menu = menu;
     }
 
