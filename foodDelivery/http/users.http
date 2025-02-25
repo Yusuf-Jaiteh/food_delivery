@@ -2,50 +2,50 @@ GET  http://localhost:8080/api/users/1 HTTP/1.1
 
 ###
 
-GET http://localhost:localhost:8080/api/users/email/yusuf@gmail.com HTTP/1.1
+GET http://localhost:8080/api/users/email/dibson HTTP/1.1
 
 ###
-GET http://localhost:8080/api/users HTTP/1.1
+GET http://localhost:8080/api/users/role/deliverer HTTP/1.1
 
 ###
 POST http://localhost:8080/api/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "firstName": "Yusuf",
-    "lastName": "Jaiteh",
+    "firstName": "Mustapha",
+    "lastName": "Dibba",
     "phone": "456789",
-    "address": "Brikama",
-    "email": "yusuf@gmaileez.com",
-    "password": "password",
-    "role": "STAFF",
-    "available": true
-}
-
-###
-PUT http://localhost:8080/api/users/4 HTTP/1.1
-Content-Type: application/json
-
-{
-    "id": 4,
-    "firstName": "Yusuf",
-    "lastName": "Jaiteh",
-    "phone": "456789",
-    "address": "Brikama",
-    "email": "yusuf@gmailea.com",
+    "address": "Bundung",
+    "email": "predator5",
     "password": "password",
     "role": "DELIVERER",
     "available": true
 }
 
 ###
-DELETE http://localhost:8080/api/users/4 HTTP/1.1
+PUT http://localhost:8080/api/users/9 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 9,
+    "firstName": "Muhammed",
+    "lastName": "Dibba",
+    "phone": "456789",
+    "address": "Bundung",
+    "email": "scientist",
+    "password": "password",
+    "role": "DELIVERER",
+    "available": true
+}
+
+###
+DELETE http://localhost:8080/api/users/5 HTTP/1.1
 
 ###
 POST http://localhost:8080/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "yusuf@gmaileez.com",
+    "username": "yus",
     "password": "password"
 }

@@ -9,10 +9,10 @@ Content-Type: application/json
 
 {
     "customer": {
-        "id": 2
+        "id": 1
     },
     "menu": {
-        "id": 4
+        "id": 1
     },
     "deliverer": {
         "id": 1

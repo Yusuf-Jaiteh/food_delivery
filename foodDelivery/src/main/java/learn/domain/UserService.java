@@ -32,6 +32,10 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+    public List<User> findByRole(){
+        return userRepository.findByRole(Role.DELIVERER);
+    }
+
     public Result<User> addUser(User user){
         Result<User> result = validate(user);
 
@@ -112,7 +116,7 @@ public class UserService {
         }
 
         if (userRepository.findByEmail(user.getEmail()).isPresent() && !userRepository.findByEmail(user.getEmail()).get().getId().equals(user.getId())) {
-            result.addMessage("Email already exists", ResultType.INVALID);
+            result.addMessage("Username already exists", ResultType.INVALID);
         }
 
         if (user.getPhone() == null || user.getPhone().isBlank()){

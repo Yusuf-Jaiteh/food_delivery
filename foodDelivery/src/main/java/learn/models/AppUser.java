@@ -1,5 +1,6 @@
 package learn.models;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class AppUser implements UserDetails {
 
     private int appUserId;
@@ -16,29 +18,6 @@ public class AppUser implements UserDetails {
     private boolean locked;
     private List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-    public int getAppUserId() {
-        return appUserId;
-    }
-
-    public void setAppUserId(int appUserId) {
-        this.appUserId = appUserId;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public void setLocked(boolean locked) {
-        this.locked = locked;
-    }
 
     public void setAuthorities(List<String> authorities) {
         this.authorities = authorities.stream()

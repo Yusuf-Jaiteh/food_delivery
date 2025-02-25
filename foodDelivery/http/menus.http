@@ -8,9 +8,9 @@ POST http://localhost:8080/api/menus HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Kaldu",
-    "description": "Good flavour",
-    "price": 200.50
+    "name": "Caesar Salad",
+    "description": "Crisp romaine lettuce with Caesar dressing and croutons.",
+    "price": 7.99
 }
 
 ###

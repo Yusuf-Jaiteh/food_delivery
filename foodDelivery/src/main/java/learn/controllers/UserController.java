@@ -40,6 +40,14 @@ public class UserController {
         }
     }
 
+    @GetMapping("/role/deliverer")
+    public ResponseEntity<List<User>> findByRole() {
+        List<User> user = userService.findByRole();
+
+            return ResponseEntity.ok(user);
+
+    }
+
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
         List<User> users = userService.findAll();

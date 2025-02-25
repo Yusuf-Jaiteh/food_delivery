@@ -41,7 +41,7 @@ public class AuthController {
                         .orElse("none");
                 return new ResponseEntity<>(
                         Map.of("jwt", jwtConverter.getTokenFromUser(appUser), "userId", String.valueOf(appUser.getAppUserId()),
-                                "role", role),
+                                "role", role, "username", appUser.getUsername()),
                         HttpStatus.OK);
             }
         } catch (AuthenticationException ex){
